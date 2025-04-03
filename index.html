@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To do list</title>
+    <link rel="stylesheet" href="./src/style.css" />
+    <link rel="icon" href="src/js/img/favicon.png" />
+  </head>
+  <body>
+    <div class="page">
+      <div class="page__container">
+        <h1 class="page__title">TO DO LIST</h1>
+        <div class="page__slogan">
+          <span class="page__slogan-text">HAVE A NICE DAY</span>
+        </div>
+      </div>
+
+      <div class="todo">
+        <div class="todo__time">
+          <img class="todo__time-icon" src="./src/img/timer.svg" alt="Timer" />
+          <span class="todo__time-text">TIME</span>
+        </div>
+
+        <div class="todo__container">
+          <div class="todo__select-difficulty">
+            <select class="todo__select" name="priority">
+              <option class="todo__option" value="Easy">Easy</option>
+              <option class="todo__option" value="Normal">Medium</option>
+              <option class="todo__option" value="Hard">Hard</option>
+            </select>
+          </div>
+
+          <div class="todo__input-wrapper">
+            <input
+              class="todo__input"
+              id="todo-input"
+              placeholder="Write your task"
+            /><button class="todo__submit-btn" type="submit" title="Add task">
+              <img
+                class="todo__btn-svg"
+                src="data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'%20standalone='no'?%3e%3csvg%20width='30px'%20height='30px'%20viewBox='0%200%2030%2030'%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'%20xmlns:xlink='http://www.w3.org/1999/xlink'%3e%3c!--%20Generator:%20Sketch%2042%20(36781)%20-%20http://www.bohemiancoding.com/sketch%20--%3e%3ctitle%3eGroup%3c/title%3e%3cdesc%3eCreated%20with%20Sketch.%3c/desc%3e%3cdefs%3e%3c/defs%3e%3cg%20id='Symbols'%20stroke='none'%20stroke-width='1'%20fill='none'%20fill-rule='evenodd'%3e%3cg%20id='plus'%20fill='%23FFFFFF'%3e%3cg%20id='Group'%3e%3crect%20id='Rectangle-3'%20x='1.42108547e-14'%20y='13'%20width='30'%20height='4'%3e%3c/rect%3e%3crect%20id='Rectangle-3'%20x='13'%20y='1.95399252e-14'%20width='4'%20height='30'%3e%3c/rect%3e%3c/g%3e%3c/g%3e%3c/g%3e%3c/svg%3e"
+                alt="Plus logo"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="list__container">
+        <h2 class="list__title">LIST</h2>
+        <div class="list__container-box">
+          <ul class="todo__list"></ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="edit-modal">
+      <div class="modal-content">
+        <span class="modal-close" id="modal-close">&times;</span>
+        <h2>Edit Task</h2>
+        <form id="edit-task-form">
+          <label for="edit-task-input">Task:</label>
+          <input type="text" id="edit-task-input" required />
+          <label for="edit-task-difficulty">Difficulty:</label>
+          <select id="edit-task-difficulty">
+            <option value="Easy">Easy</option>
+            <option value="Medium">Medium</option>
+            <option value="Hard">Hard</option>
+          </select>
+          <button type="submit">Save Changes</button>
+        </form>
+      </div>
+    </div>
+
+    <script type="module" src="./src/js/main.js"></script>
+  </body>
+</html>

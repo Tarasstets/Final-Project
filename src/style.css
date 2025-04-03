@@ -1,0 +1,248 @@
+:root {
+    --list-background-color: #353535;
+    --background-color: #5e5b5b;
+    --primary-color: #8c53ff;
+    --primary-hover-color: #7a46e5;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+}
+
+/* ========== Заголовок ========== */
+.page__container {
+    text-align: center;
+}
+
+.page__title {
+    font-size: 2em;
+    margin: 20px 0;
+    color: white;
+}
+
+.page__slogan {
+    font-size: 1.2em;
+    color: #ccc;
+}
+
+/* ========== Блок "To-Do" ========== */
+.todo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.todo__time {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    font-size: 1.2em;
+}
+
+.todo__time-icon {
+    height: 20px;
+    width: 20px;
+}
+
+/* ========== Поле вводу і кнопка ========== */
+.todo__input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+}
+
+.todo__input {
+    width: 100%;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    padding: 10px 50px 10px 15px;
+    /* Простір для кнопки */
+    font-size: 16px;
+    background-color: yellow;
+}
+
+/* Кнопка "+" в інпуті */
+.todo__submit-btn {
+    position: absolute;
+    right: 10px;
+    width: 35px;
+    height: 35px;
+    border: none;
+    cursor: pointer;
+    background-color: black;;
+}
+
+.todo__delete-btn {
+    width: 20px;
+    height: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    margin-left: auto;
+}
+
+.todo__edit-btn {
+    width: 20px;
+    height: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    margin-left: auto;
+    margin-right: 30px;
+    padding-bottom: 20px;
+}
+
+.todo__edit-icon {
+    width: 20px;
+    height: 20px;
+    padding-bottom: 63px;
+}
+
+.todo__delete-icon {
+    width: 20px;
+    height:20px;
+    padding-bottom: 35px;
+}
+.todo__btn-svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* ========== Кнопка "Додати" ========== */
+.todo__add-btn-container {
+    display: flex;
+    margin-top: 20px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.todo__add-btn {
+    width: 60px;
+    height: 60px;
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.todo__add-btn:hover {
+    background-color: var(--primary-hover-color);
+}
+
+/* ========== Список завдань ========== */
+.list__container {
+    text-align: center;
+    background-color: var(--list-background-color);
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.list__container-box {
+    max-width: 600px;
+    width: 100%;
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+/* Стилі списку */
+.list__items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.list__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    background: #f9f9f9;
+    border-radius: 5px;
+}
+
+/* Модальне вікно */
+.modal {
+    display: none;
+    /* За замовчуванням приховане */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Напівпрозорий фон */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+#edit-task-form {
+    display: flex;
+    flex-direction: column;
+}
+
+#edit-task-input,
+#edit-task-difficulty {
+    margin: 10px 0;
+    padding: 8px;
+    font-size: 16px;
+}
+
+#edit-task-form button {
+    background-color: #8c53ff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#edit-task-form button:hover {
+    background-color: #7a46e5;
+}
