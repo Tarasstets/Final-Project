@@ -4,6 +4,7 @@ import {
 } from "./localStorage.js";
 
 const list = document.querySelector(".todo__list");
+let editingIndex = null;
 
 export function displayTasks(tasks) {
   console.log("Displaying tasks:", tasks);
@@ -12,7 +13,7 @@ export function displayTasks(tasks) {
     const li = document.createElement("li");
     li.className = "todo__item";
     li.innerHTML = `
-      <span class="todo__item-span">${task.taskInput}</span>
+      <span class="task-text">${task.taskInput}</span>
       <span class="difficulty">${task.difficulty}</span>
       <div class="todo__actions">
         <button class="todo__delete-btn" data-index="${index}">
@@ -63,48 +64,4 @@ document.addEventListener("click", (event) => {
     setTasksInLocalStorage(tasks); // Оновлюємо LocalStorage
     displayTasks(tasks); // Оновлюємо список на сторінці
   }
-});
-
-// Відкриваємо модальне вікно для редагування
-document.addEventListener("click", (event) => {
-  if (event.target.classList.contains("todo__edit-btn")) {
-    const index = event.target.getAttribute("data-index");
-    const tasks = getTasksFromLocalStorage();
-
-    editingIndex = index; // Зберігаємо індекс редагованого завдання
-    const task = tasks[index];
-
-    // Заповнюємо поля модального вікна поточними значеннями
-    taskInput.value = task.taskInput;
-    taskDifficulty.value = task.difficulty;
-
-    modal.style.display = "flex"; // Відкриваємо модальне вікно
-  }
-});
-
-// Закриття модального вікна
-modalClose.addEventListener("click", () => {
-  modal.style.display = "none"; // Закриваємо модальне вікно
-});
-
-// Збереження змін при сабміті форми
-editForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-
-  const tasks = getTasksFromLocalStorage();
-  const newText = taskInput.value.trim();
-  const newDifficulty = taskDifficulty.value;
-
-  if (newText === "") {
-    alert("Please, fill the task field.");
-    return;
-  }
-
-  // Оновлюємо завдання
-  tasks[editingIndex].taskInput = newText;
-  tasks[editingIndex].difficulty = newDifficulty;
-  setTasksInLocalStorage(tasks);
-  displayTasks(tasks); // Оновлюємо список
-
-  modal.style.display = "none"; // Закриваємо модальне вікно
 });
