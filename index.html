@@ -55,26 +55,25 @@
       </div>
     </div>
 
-    <!-- Модальне вікно -->
     <div class="modal" id="edit-modal">
-      <div class="modal-content">
-        <span class="modal-close" id="modal-close">&times;</span>
-        <!-- Кнопка для закриття -->
-        <h2>Edit Task</h2>
-        <form id="edit-task-form">
-          <label for="edit-task-input">Task:</label>
-          <input type="text" id="edit-task-input" required />
-          <label for="edit-task-difficulty">Difficulty:</label>
-          <select id="edit-task-difficulty">
-            <option value="Easy">Easy</option>
-            <option value="Medium">Medium</option>
-            <option value="Hard">Hard</option>
-          </select>
-          <button type="submit">Save Changes</button>
-        </form>
+      <div class="modal__content">
+        <h2>Редагувати задачу</h2>
+        <input
+          type="text"
+          id="edit-task-input"
+          placeholder="Новий текст задачі"
+        />
+        <select id="edit-difficulty">
+          <option value="Легка">Легка</option>
+          <option value="Середня">Середня</option>
+          <option value="Важка">Важка</option>
+        </select>
+        <div class="modal__buttons">
+          <button id="modal-save">Зберегти</button>
+          <button id="modal-close">Скасувати</button>
+        </div>
       </div>
     </div>
-
     <script type="module" src="./src/js/main.js"></script>
   </body>
 </html>

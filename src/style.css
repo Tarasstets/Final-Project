@@ -115,6 +115,28 @@ body {
     padding-bottom: 63px;
 }
 
+.todo__done-btn {
+    width: 20px;
+    height: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    margin-left: auto;
+    margin-right: 60px;
+    padding-bottom: 20px;
+}
+
+.todo__done-icon {
+    width: 20px;
+    height: 20px;
+    padding-bottom: 112px;
+    max-height: 20px;
+}
+
 .todo__delete-icon {
     width: 20px;
     height:20px;
@@ -192,60 +214,34 @@ body {
     border-radius: 5px;
 }
 
-/* Модальне вікно */
-/* Стиль модального вікна */
-.modal {
-    display: none;
-    /* Спочатку модальне вікно приховане */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    /* Прозорий фон */
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+.task-done {
+    text-decoration: line-through;
+    opacity: 0.6;
 }
 
-.modal-content {
-    background: white;
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal__content {
+    background-color: #fff;
+    margin: 10% auto;
     padding: 20px;
     border-radius: 10px;
-    width: 400px;
+    width: 300px;
     text-align: center;
 }
 
-.modal-close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 20px;
-    cursor: pointer;
-}
-
-#edit-task-form {
+.modal__buttons {
     display: flex;
-    flex-direction: column;
-}
-
-#edit-task-input,
-#edit-task-difficulty {
-    margin: 10px 0;
-    padding: 8px;
-    font-size: 16px;
-}
-
-#edit-task-form button {
-    background-color: #8c53ff;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#edit-task-form button:hover {
-    background-color: #7a46e5;
+    justify-content: space-between;
+    margin-top: 15px;
 }
