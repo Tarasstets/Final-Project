@@ -23,7 +23,12 @@ class ToDoList {
   }
 
   loadTasks() {
-    return getTasksFromLocalStorage() || [];
+    const savedTasks = getTasksFromLocalStorage() || [];
+    return savedTasks.map((task) =>
+      Object.assign(new Task(task.taskInput, task.difficulty), {
+        done: task.done,
+      })
+    );
   }
 
   saveTasks() {
@@ -140,8 +145,9 @@ document.addEventListener("DOMContentLoaded", () => {
       todoList.deleteTask(index);
     }
 
-    if (event.target.classList.contains("todo__done-icon")) {
-      const index = event.target.getAttribute("data-index");
+    if (event.target.closest(".todo__done-btn")) {
+      const btn = event.target.closest(".todo__done-btn");
+      const index = btn.getAttribute("data-index");
       todoList.toggleTaskDone(index);
     }
   });
