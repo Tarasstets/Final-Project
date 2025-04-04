@@ -82,6 +82,11 @@ body {
     background-color: var(--second-background-color);
 }
 
+.todo__icon {
+    width: 30px;
+    height: 30px;
+}
+
 /* ========== Поле вводу і кнопка ========== */
 .todo__container {
     display: flex;
