@@ -182,3 +182,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+const clock = document.querySelector(".todo__time");
+
+function updateClock() {
+  const now = new Date();
+  const options = { year: "numeric", month: "long", day: "numeric" };
+  const dateStr = now.toLocaleDateString("uk", options); // Формат: 4 квітня 2025
+  const timeStr = now.toLocaleTimeString("uk"); // Формат: 14:35:22
+
+  clock.innerHTML = `${dateStr}, ${timeStr}`;
+}
+
+setInterval(updateClock, 1000);
