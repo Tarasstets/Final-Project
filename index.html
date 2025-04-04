@@ -26,7 +26,7 @@
           <div class="todo__select-difficulty">
             <select class="todo__select" name="priority">
               <option class="todo__option" value="Easy">Easy</option>
-              <option class="todo__option" value="Normal">Medium</option>
+              <option class="todo__option" value="Medium">Medium</option>
               <option class="todo__option" value="Hard">Hard</option>
             </select>
           </div>
@@ -48,8 +48,28 @@
       </div>
 
       <div class="list__container">
-        <h2 class="list__title">LIST</h2>
+        <h2 class="list__title"><b>TASKS</b></h2>
         <div class="list__container-box">
+          <div class="filters">
+            <div class="filter-group">
+              <button class="filter-btn" data-status="all">All</button>
+              <button class="filter-btn" data-status="in-progress">
+                In progress
+              </button>
+              <button class="filter-btn" data-status="done">Done</button>
+            </div>
+
+            <div class="filter-group">
+              <button class="filter-btn" data-difficulty="all">
+                Difficulties
+              </button>
+              <button class="filter-btn" data-difficulty="Easy">Easy</button>
+              <button class="filter-btn" data-difficulty="Medium">
+                Medium
+              </button>
+              <button class="filter-btn" data-difficulty="Hard">Hard</button>
+            </div>
+          </div>
           <ul class="todo__list"></ul>
         </div>
       </div>
@@ -57,20 +77,20 @@
 
     <div class="modal" id="edit-modal">
       <div class="modal__content">
-        <h2>Редагувати задачу</h2>
+        <h2>Edit task</h2>
         <input
           type="text"
           id="edit-task-input"
           placeholder="Новий текст задачі"
         />
         <select id="edit-difficulty">
-          <option value="Легка">Легка</option>
-          <option value="Середня">Середня</option>
-          <option value="Важка">Важка</option>
+          <option value="Easy">Easy</option>
+          <option value="Medium">Medium</option>
+          <option value="Hard">Hard</option>
         </select>
         <div class="modal__buttons">
-          <button id="modal-save">Зберегти</button>
-          <button id="modal-close">Скасувати</button>
+          <button id="modal-save">Save</button>
+          <button id="modal-close">Cancel</button>
         </div>
       </div>
     </div>

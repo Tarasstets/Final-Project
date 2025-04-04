@@ -3,120 +3,182 @@ import {
   setTasksInLocalStorage,
 } from "./localStorage.js";
 
-const list = document.querySelector(".todo__list");
-let editingIndex = null;
-
-export function displayTasks(tasks) {
-  console.log("Displaying tasks:", tasks);
-  list.innerHTML = ""; // Clear the list before displaying tasks
-  tasks.forEach((task, index) => {
-    const li = document.createElement("li");
-    li.className = "todo__item";
-    li.innerHTML = `
-      <span class="task-text">${task.taskInput}</span>
-      <span class="difficulty">${task.difficulty}</span>
-      <div class="todo__actions">
-        <button class="todo__delete-btn" data-index="${index}">
-        <img src="./src/img/delete.svg" alt="Delete" class="todo__delete-icon"
-        </button>
-        <button class="todo__edit-btn" data-index="${index}">
-        <img src="./src/img/pencil.svg" alt="Delete" class="todo__edit-icon"
-        </button>
-        <button class="todo__done-btn" data-index="${index}">
-        <img src="./src/img/done.svg" alt="Delete" class="todo__done-icon"
-        </button>
-      </div>
-    `;
-    list.appendChild(li);
-  });
-}
-
-export function addTask(taskInput, difficulty) {
-  console.log("Adding task:", taskInput, difficulty);
-  if (!taskInput.trim()) {
-    alert("Please, fill the main field");
-    return;
+class Task {
+  constructor(taskInput, difficulty) {
+    this.taskInput = taskInput;
+    this.difficulty = difficulty;
+    this.done = false;
   }
 
-  const tasks = getTasksFromLocalStorage();
-  tasks.push({ taskInput, difficulty });
-  setTasksInLocalStorage(tasks);
-  displayTasks(tasks);
+  toggleDone() {
+    this.done = !this.done;
+  }
 }
 
-const taskInput = document.getElementById("todo-input");
-const difficultySelect = document.querySelector("select[name='priority']");
-const addBtn = document.querySelector(".todo__submit-btn");
+class ToDoList {
+  constructor() {
+    this.tasks = this.loadTasks();
+    this.statusFilter = "all";
+    this.difficultyFilter = "all";
+  }
 
-addBtn.addEventListener("click", () => {
-  const taskInputValue = taskInput.value.trim();
-  const difficultyValue = difficultySelect.value;
-  addTask(taskInputValue, difficultyValue);
-});
+  loadTasks() {
+    return getTasksFromLocalStorage() || [];
+  }
+
+  saveTasks() {
+    setTasksInLocalStorage(this.tasks);
+  }
+
+  addTask(taskInput, difficulty) {
+    if (!taskInput.trim()) {
+      alert("Please, fill the main field");
+      return;
+    }
+
+    const newTask = new Task(taskInput, difficulty);
+    this.tasks.push(newTask);
+    this.saveTasks();
+    this.displayTasks();
+  }
+
+  deleteTask(index) {
+    this.tasks.splice(index, 1);
+    this.saveTasks();
+    this.displayTasks();
+  }
+
+  toggleTaskDone(index) {
+    this.tasks[index].toggleDone();
+    this.saveTasks();
+    this.displayTasks();
+  }
+
+  filterTasks() {
+    return this.tasks.filter((task) => {
+      const isDone = task.done === true;
+
+      if (this.statusFilter === "in-progress" && isDone) return false;
+      if (this.statusFilter === "done" && !isDone) return false;
+      if (
+        this.difficultyFilter !== "all" &&
+        task.difficulty !== this.difficultyFilter
+      )
+        return false;
+
+      return true;
+    });
+  }
+
+  displayTasks() {
+    const list = document.querySelector(".todo__list");
+    list.innerHTML = "";
+
+    this.filterTasks().forEach((task, index) => {
+      const li = document.createElement("li");
+      li.className = "todo__item";
+
+      const doneClass = task.done ? "task-done" : "";
+
+      li.innerHTML = `
+        <span class="task-text ${doneClass}">${task.taskInput}</span>
+        <span class="difficulty ${doneClass}">${task.difficulty}</span>
+        <div class="todo__actions">
+          <button class="todo__delete-btn" data-index="${index}">
+            <img src="./src/img/delete.svg" alt="Delete" class="todo__delete-icon" data-index="${index}">
+          </button>
+          <button class="todo__edit-btn" data-index="${index}">
+            <img src="./src/img/pencil.svg" alt="Edit" class="todo__edit-icon" data-index="${index}">
+          </button>
+          <button class="todo__done-btn" data-index="${index}">
+            <img src="./src/img/done.svg" alt="Done" class="todo__done-icon" data-index="${index}">
+          </button>
+        </div>
+      `;
+
+      list.appendChild(li);
+    });
+  }
+
+  editTask(index, newTaskInput, newDifficulty) {
+    this.tasks[index].taskInput = newTaskInput;
+    this.tasks[index].difficulty = newDifficulty;
+    this.saveTasks();
+    this.displayTasks();
+  }
+
+  setFilters(status, difficulty) {
+    if (status !== null) this.statusFilter = status;
+    if (difficulty !== null) this.difficultyFilter = difficulty;
+    this.displayTasks();
+  }
+}
 
 document.addEventListener("DOMContentLoaded", () => {
-  const tasks = getTasksFromLocalStorage(); // Отримуємо завдання з localStorage
-  displayTasks(tasks); // Відображаємо їх у списку
-});
+  const todoList = new ToDoList();
+  todoList.displayTasks();
 
-document.addEventListener("click", (event) => {
-  if (event.target.classList.contains("todo__delete-icon")) {
-    const index = event.target.getAttribute("data-index"); // Отримуємо індекс завдання
-    const tasks = getTasksFromLocalStorage(); // Отримуємо список завдань
-    tasks.splice(index, 1); // Видаляємо завдання з масиву
-    setTasksInLocalStorage(tasks); // Оновлюємо LocalStorage
-    displayTasks(tasks); // Оновлюємо список на сторінці
-  }
+  const taskInput = document.getElementById("todo-input");
+  const difficultySelect = document.querySelector("select[name='priority']");
+  const addBtn = document.querySelector(".todo__submit-btn");
 
-  // DONE
-  if (event.target.classList.contains("todo__done-icon")) {
-    const taskItem = event.target.closest(".todo__item");
-    const taskText = taskItem.querySelector(".task-text");
-    const taskDifficulty = taskItem.querySelector(".difficulty");
+  addBtn.addEventListener("click", () => {
+    const taskInputValue = taskInput.value.trim();
+    const difficultyValue = difficultySelect.value;
+    todoList.addTask(taskInputValue, difficultyValue);
+  });
 
-    taskText.classList.toggle("task-done");
-    taskDifficulty.classList.toggle("task-done");
-  }
-});
+  document.addEventListener("click", (event) => {
+    if (event.target.classList.contains("todo__delete-icon")) {
+      const index = event.target.getAttribute("data-index");
+      todoList.deleteTask(index);
+    }
 
-const modal = document.getElementById("edit-modal");
-const modalInput = document.getElementById("edit-task-input");
-const modalSelect = document.getElementById("edit-difficulty");
-const modalSave = document.getElementById("modal-save");
-const modalClose = document.getElementById("modal-close");
+    if (event.target.classList.contains("todo__done-icon")) {
+      const index = event.target.getAttribute("data-index");
+      todoList.toggleTaskDone(index);
+    }
+  });
 
-document.addEventListener("click", (event) => {
-  // Відкриття модального вікна
-  if (event.target.closest(".todo__edit-btn")) {
-    const btn = event.target.closest(".todo__edit-btn");
-    editingIndex = parseInt(btn.getAttribute("data-index"));
-    const tasks = getTasksFromLocalStorage();
-    const task = tasks[editingIndex];
+  const modal = document.getElementById("edit-modal");
+  const modalInput = document.getElementById("edit-task-input");
+  const modalSelect = document.getElementById("edit-difficulty");
+  const modalSave = document.getElementById("modal-save");
+  const modalClose = document.getElementById("modal-close");
 
-    modalInput.value = task.taskInput;
-    modalSelect.value = task.difficulty;
+  document.addEventListener("click", (event) => {
+    if (event.target.closest(".todo__edit-btn")) {
+      const btn = event.target.closest(".todo__edit-btn");
+      const index = btn.getAttribute("data-index");
+      const task = todoList.tasks[index];
 
-    modal.style.display = "flex";
-  }
+      modalInput.value = task.taskInput;
+      modalSelect.value = task.difficulty;
 
-  // Закриття
-  if (event.target === modal || event.target === modalClose) {
-    modal.style.display = "none";
-  }
-});
+      modal.style.display = "flex";
+    }
 
-// Збереження змін
-modalSave.addEventListener("click", () => {
-  const tasks = getTasksFromLocalStorage();
+    if (event.target === modal || event.target === modalClose) {
+      modal.style.display = "none";
+    }
+  });
 
-  if (editingIndex !== null && tasks[editingIndex]) {
-    tasks[editingIndex].taskInput = modalInput.value;
-    tasks[editingIndex].difficulty = modalSelect.value;
+  modalSave.addEventListener("click", () => {
+    const index = editingIndex;
+    if (index !== null) {
+      const newTaskInput = modalInput.value;
+      const newDifficulty = modalSelect.value;
+      todoList.editTask(index, newTaskInput, newDifficulty);
+      modal.style.display = "none";
+    }
+  });
 
-    setTasksInLocalStorage(tasks);
-    displayTasks(tasks);
+  document.querySelectorAll(".filter-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const status = btn.getAttribute("data-status");
+      const difficulty = btn.getAttribute("data-difficulty");
 
-    modal.style.display = "none";
-    editingIndex = null;
-  }
+      todoList.setFilters(status, difficulty);
+    });
+  });
 });
