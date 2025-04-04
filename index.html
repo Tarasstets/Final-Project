@@ -18,8 +18,14 @@
 
       <div class="todo">
         <div class="todo__time">
-          <img class="todo__time-icon" src="./src/img/timer.svg" alt="Timer" />
-          <span class="todo__time"></span>
+          <div class="todo__time-container">
+            <img
+              class="todo__time-icon"
+              src="./src/img/clock.svg"
+              alt="Timer"
+            />
+            <span class="todo__time"></span><br />
+          </div>
         </div>
 
         <div class="todo__container">
@@ -79,18 +85,19 @@
       <div class="modal__content">
         <h2>Edit task</h2>
         <input
+          class="edit-task-input"
           type="text"
           id="edit-task-input"
           placeholder="Новий текст задачі"
         />
-        <select id="edit-difficulty">
+        <select class="edit-difficulty" id="edit-difficulty">
           <option value="Easy">Easy</option>
           <option value="Medium">Medium</option>
           <option value="Hard">Hard</option>
         </select>
         <div class="modal__buttons">
-          <button id="modal-save">Save</button>
-          <button id="modal-close">Cancel</button>
+          <button class="modal-save" id="modal-save">Save</button>
+          <button class="modal-close" id="modal-close">Cancel</button>
         </div>
       </div>
     </div>

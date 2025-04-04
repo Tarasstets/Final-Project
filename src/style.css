@@ -1,11 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 :root {
     --second-background-color: #282828;
     --primary-hover-color: #7a46e5;
     --body-color: #181818;
+    --black: black;
+    --white: white;
+    --slogan-color: #ccc;
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Poppins", sans-serif;
     margin: 0;
     padding: 0;
     background-color: var(--body-color);
@@ -19,12 +24,12 @@ body {
 .page__title {
     font-size: 2em;
     margin: 20px 0;
-    color: white;
+    color: var(--white);
 }
 
 .page__slogan {
     font-size: 1.2em;
-    color: #ccc;
+    color: var(--slogan-color);
 }
 
 /* ========== Блок "To-Do" ========== */
@@ -36,17 +41,24 @@ body {
     margin-top: 20px;
 }
 
+.todo__time-container {
+    display: flex;
+    flex-direction: row;
+}
+
 .todo__time {
     display: flex;
-    align-items: center;
+    align-items: left;
     gap: 10px;
-    color: white;
+    color: var(--white);
     font-size: 1.2em;
+    margin-bottom: 10px;
+    margin-left: 10px;
 }
 
 .todo__time-icon {
-    height: 20px;
-    width: 20px;
+    height: 30px;
+    width: 30px;
 }
 
 .todo__select-difficulty {
@@ -69,6 +81,7 @@ body {
     border-radius: 8px;
     background-color: var(--second-background-color);
 }
+
 /* ========== Поле вводу і кнопка ========== */
 .todo__container {
     display: flex;
@@ -91,7 +104,6 @@ body {
     border-radius: 8px;
     border: 1px solid #ddd;
     padding: 10px 50px 10px 15px;
-    /* Простір для кнопки */
     font-size: 16px;
     background-color: var(--second-background-color);
 }
@@ -100,7 +112,6 @@ body {
     color: white;
 }
 
-/* Кнопка "+" в інпуті */
 .todo__submit-btn {
     position: absolute;
     right: 10px;
@@ -180,7 +191,6 @@ body {
     background-color: var(--second-background-color);
 }
 
-/* ========== Кнопка "Додати" ========== */
 .todo__add-btn-container {
     display: flex;
     margin-top: 20px;
@@ -193,7 +203,7 @@ body {
     width: 60px;
     height: 60px;
     background-color: var(--body-color);
-    color: white;
+    color: var(--white);
     font-size: 30px;
     border: none;
     border-radius: 10px;
@@ -227,7 +237,6 @@ body {
     border-radius: 10px;
 }
 
-/* Стилі списку */
 .list__items {
     list-style: none;
     padding: 0;
@@ -243,7 +252,7 @@ body {
     align-items: center;
     padding: 10px;
     border-bottom: 1px solid #ddd;
-    background: #f9f9f9;
+    background: var(--white);
     border-radius: 5px;
 }
 
@@ -265,7 +274,7 @@ body {
 }
 
 .modal__content {
-    background-color: #fff;
+    background-color: var(--body-color);
     margin: 10% auto;
     padding: 20px;
     border-radius: 10px;
@@ -273,10 +282,35 @@ body {
     text-align: center;
 }
 
+.edit-task-input {
+    background-color: var(--second-background-color);
+    border: none;
+}
+
+.modal-save {
+    background-color: var(--second-background-color);
+    cursor: pointer;
+}
+
+.modal-close {
+    cursor: pointer;
+    background-color: var(--second-background-color);
+}
+
+.edit-difficulty {
+    background-color: var(--second-background-color);
+    border: none;
+}
+
 .modal__buttons {
     display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    background-color: var(--second-background-color);
+    width: 120px;
+    margin: auto;
+    margin-top: 20px;
 }
 
 .filters {

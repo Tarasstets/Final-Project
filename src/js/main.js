@@ -79,10 +79,16 @@ class ToDoList {
       li.className = "todo__item";
 
       const doneClass = task.done ? "task-done" : "";
+      const difficultyClass =
+        task.difficulty === "Easy"
+          ? "easy"
+          : task.difficulty === "Medium"
+          ? "medium"
+          : "hard";
 
       li.innerHTML = `
         <span class="task-text ${doneClass}">${task.taskInput}</span>
-        <span class="difficulty ${doneClass}">${task.difficulty}</span>
+        <span class="difficulty ${doneClass}">(${task.difficulty})</span>
         <div class="todo__actions">
           <button class="todo__delete-btn" data-index="${index}">
             <img src="./src/img/delete.svg" alt="Delete" class="todo__delete-icon" data-index="${index}">
@@ -152,6 +158,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const index = btn.getAttribute("data-index");
       const task = todoList.tasks[index];
 
+      editingIndex = index;
+
       modalInput.value = task.taskInput;
       modalSelect.value = task.difficulty;
 
@@ -162,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
       modal.style.display = "none";
     }
   });
-
+  let editingIndex = null;
   modalSave.addEventListener("click", () => {
     const index = editingIndex;
     if (index !== null) {
@@ -191,7 +199,7 @@ function updateClock() {
   const dateStr = now.toLocaleDateString("uk", options); // Формат: 4 квітня 2025
   const timeStr = now.toLocaleTimeString("uk"); // Формат: 14:35:22
 
-  clock.innerHTML = `${dateStr}, ${timeStr}`;
+  clock.querySelector(".todo__time").innerHTML = `${dateStr}, ${timeStr}`;
 }
 
 setInterval(updateClock, 1000);
