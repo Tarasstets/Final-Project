@@ -27,7 +27,27 @@
 ---
 
 ## 🗂️ Структура проєкту
-/src │ ├── img/ # Іконки інтерфейсу ├── task.js # Клас Task (модель задачі) ├── toDoList.js # Клас ToDoList (логіка задач) ├── ui.js # Клас UI (інтерфейс, обробка подій) ├── slogan.js # Функція для показу мотиваційного гасла ├── clock.js # Функція оновлення дати і часу ├── localStorage.js # Функції для роботи з localStorage └── main.js # Точка входу, ініціалізація
+.
+├── src/
+│   ├── img/
+│   │   ├── clock.svg
+│   │   ├── delete.svg
+│   │   ├── done.svg
+│   │   ├── favicon.png
+│   │   ├── pencil.svg
+│   │   ├── timer.svg
+│   │   ├── todo.svg
+│   │   └── trash-bin.svg
+│   ├── js/
+│   │   ├── clock.js
+│   │   ├── localStorage.js
+│   │   ├── main.js
+│   │   ├── slogan.js
+│   │   ├── task.js
+│   │   ├── toDoList.js
+│   │   └── ui.js
+│   └── style.css
+└── index.html
 
 yaml
 Копировать
