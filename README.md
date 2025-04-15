@@ -27,25 +27,24 @@
 ---
 
 ## 🗂️ Структура проєкту
-.
-├── src/
-│   ├── img/
-│   │   ├── clock.svg
-│   │   ├── delete.svg
-│   │   ├── done.svg
-│   │   ├── favicon.png
-│   │   ├── pencil.svg
-│   │   ├── timer.svg
-│   │   ├── todo.svg
-│   │   └── trash-bin.svg
-│   ├── js/
-│   │   ├── clock.js
-│   │   ├── localStorage.js
-│   │   ├── main.js
-│   │   ├── slogan.js
-│   │   ├── task.js
-│   │   ├── toDoList.js
-│   │   └── ui.js
-│   └── style.css
-└── index.html
+src
+├── img
+│   ├── clock.svg
+│   ├── delete.svg
+│   ├── done.svg
+│   ├── favicon.png
+│   ├── pencil.svg
+│   ├── timer.svg
+│   ├── todo.svg
+│   └── trash-bin.svg
+├── js
+│   ├── clock.js
+│   ├── localStorage.js
+│   ├── main.js
+│   ├── slogan.js
+│   ├── task.js
+│   ├── toDoList.js
+│   └── ui.js
+└── style.css
+index.html
 
